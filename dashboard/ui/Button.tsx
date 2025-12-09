@@ -2,6 +2,8 @@ import { IButtonProps } from "@/types/ui"
 import { FC, JSX } from "react"
 
 const Button:FC<IButtonProps> = ({text,...props}):JSX.Element => { 
+    console.log('button');
+    
     return(   
         <button
         className="w-full py-2 px-4
