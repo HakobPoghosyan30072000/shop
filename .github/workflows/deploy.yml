@@ -1,37 +1,37 @@
 name: Deploy Dashboard to Vercel
 
 on:
-push:
-branches:
-- main # Trigger deployment when pushing to main branch
+ push:
+  branches:
+   - main # Trigger deployment when pushing to main branch
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+  runs-on: ubuntu-latest
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v3
+  steps:
+   - name: Checkout repository
+     uses: actions/checkout@v3
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v3
-    with:
+   - name: Setup Node.js
+     uses: actions/setup-node@v3
+     with:
       node-version: 20
 
-  - name: Install dependencies
-    working-directory: ./dashboard
-    run: yarn install --frozen-lockfile
+   - name: Install dependencies
+     working-directory: ./dashboard
+     run: yarn install --frozen-lockfile
 
-  - name: Build Dashboard
-    working-directory: ./dashboard
-    run: yarn build
+   - name: Build Dashboard
+     working-directory: ./dashboard
+     run: yarn build
 
-  - name: Deploy to Vercel
+   - name: Deploy to Vercel
     uses: amondnet/vercel-action@v23
     with:
-      vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      vercel-args: '--prod'
-      working-directory: ./dashboard
-      vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-      github-comment: true
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-args: '--prod'
+        working-directory: ./dashboard
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        github-comment: true
