@@ -24,7 +24,7 @@ jobs:
 
       - name: Build Project
         working-directory: ./dashboard
-        run: yarn build
+        run: yarn build --cwd dashboard
 
       - name: Deploy to Vercel
         env:
