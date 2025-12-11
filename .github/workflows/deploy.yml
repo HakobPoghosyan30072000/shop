@@ -23,9 +23,11 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build Project
+        working-directory: ./dashboard
         run: yarn build
 
       - name: Deploy to Vercel
+        working-directory: ./dashboard
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
