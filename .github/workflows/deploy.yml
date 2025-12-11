@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./dashboard
+        working-directory: /Users/hakobpoghosyan/Projects/shop/dashboard
 
     steps:
       - name: Checkout Repository
