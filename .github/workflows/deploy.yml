@@ -27,7 +27,7 @@ jobs:
         run: yarn install
 
       - name: Set environment
-        run: cp .env.dev .env
+        run: cp .env.production
 
       - name: Build dashboard
         run: yarn run build
