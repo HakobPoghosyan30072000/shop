@@ -9,8 +9,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: dashboard  
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -18,12 +22,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies
-        working-directory: ./dashboard
-        run: yarn install --frozen-lockfile
+      - name: Install dependencies
+        run: yarn install
 
-      - name: Build Project
-        working-directory: ./dashboard
+      - name: Build project
         run: yarn build
 
       - name: Deploy to Vercel
