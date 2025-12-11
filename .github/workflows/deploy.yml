@@ -24,9 +24,10 @@ jobs:
 
       - name: Build Project
         working-directory: ./dashboard
-        run: yarn build --cwd dashboard
+        run: yarn build
 
       - name: Deploy to Vercel
+        working-directory: ./dashboard
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -35,5 +36,4 @@ jobs:
           echo "ORG: $VERCEL_ORG_ID"
           echo "PROJECT: $VERCEL_PROJECT_ID"
           echo "TOKEN LENGTH: ${#VERCEL_TOKEN}"
-          cd dashboard
           npx vercel deploy --prod --yes --token $VERCEL_TOKEN --cwd .
