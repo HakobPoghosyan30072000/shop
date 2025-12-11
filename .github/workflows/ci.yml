@@ -12,7 +12,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: dashboard   # 👈 IMPORTANT
+        working-directory: dashboard  
 
     steps:
       - name: Checkout repository
