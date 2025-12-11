@@ -9,10 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: /dashboard  
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -23,6 +19,7 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
+        working-directory: dashboard
         run: yarn install --frozen-lockfile
 
       - name: Build Project
