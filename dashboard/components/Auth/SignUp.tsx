@@ -26,6 +26,7 @@ const SignUp: FC = ():JSX.Element => {
       console.log(error)
     }
     
+      console.log('CD');
       
     
   }
