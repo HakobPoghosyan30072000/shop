@@ -22,7 +22,7 @@ const { dark, toggleDark } = useContext(DarkModeContext);
         }`}
       ></div>
     </button>
-      <h1 className="text-xl font-bold">My App Header development</h1>
+      <h1 className="text-xl font-bold">My App Header aaaaaaaaaa</h1>
       </div>
     </header>
   );
