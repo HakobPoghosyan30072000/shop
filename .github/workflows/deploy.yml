@@ -9,9 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: dashboard  # Remove this if your project is in root directory
+    # defaults:
+    #   run:
+    #     working-directory: dashboard  # Remove this if your project is in root directory
 
     steps:
       - name: Checkout repository
