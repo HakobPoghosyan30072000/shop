@@ -1,42 +1,42 @@
 name: Deploy to Vercel
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: dashboard
 
-defaults:
-  run:
-    working-directory: dashboard  # matches Vercel root directory
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: '20'
-      cache: 'yarn'
-      cache-dependency-path: 'yarn.lock'  # inside dashboard, remove 'dashboard/'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
-  - name: Install dependencies
-    run: yarn install --frozen-lockfile
+      - name: Build project
+        run: yarn build
 
-  - name: Build project
-    run: yarn build
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
 
-  - name: Install Vercel CLI
-    run: npm install --global vercel@latest
-
-  - name: Deploy to Vercel
-    env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-    run: |
-      vercel deploy --prod --yes --token "$VERCEL_TOKEN"
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          vercel deploy --prod --yes --token "$VERCEL_TOKEN"
