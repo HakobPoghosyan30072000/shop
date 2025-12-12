@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: '20'
           cache: 'yarn'
-          # Update cache path to point to your dashboard's lockfile
-          cache-dependency-path: dashboard/yarn.lock
+          # More flexible cache path that won't fail if file doesn't exist initially
+          cache-dependency-path: '**/yarn.lock'
 
       - name: Install dependencies
         run: |
