@@ -21,8 +21,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          # cache: 'yarn'  # Use 'npm' if you use npm instead of yarn
-          # cache-dependency-path: dashboard/yarn.lock  # Remove 'dashboard/' if project is in root
+          cache: 'yarn'  # Use 'npm' if you use npm instead of yarn
+          cache-dependency-path: dashboard/yarn.lock  # Remove 'dashboard/' if project is in root
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
