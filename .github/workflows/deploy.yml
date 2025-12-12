@@ -9,7 +9,7 @@ jobs:
 deploy:
 runs-on: ubuntu-latest
 
-```
+
 defaults:
   run:
     working-directory: dashboard
@@ -39,4 +39,3 @@ steps:
         --org ${{ secrets.VERCEL_ORG_ID }} \
         --project ${{ secrets.VERCEL_PROJECT_ID }} \
         --yes
-```
