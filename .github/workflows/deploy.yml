@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -18,11 +19,11 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        working-directory: dashboard
+        working-directory: ./dashboard
         run: yarn install --frozen-lockfile
 
       - name: Build Project
-        working-directory: dashboard
+        working-directory: ./dashboard
         run: yarn build
 
       - name: Deploy to Vercel
@@ -35,9 +36,9 @@ jobs:
           echo "ORG: $VERCEL_ORG_ID"
           echo "PROJECT: $VERCEL_PROJECT_ID"
           echo "TOKEN LENGTH: ${#VERCEL_TOKEN}"
-          
+
           npx vercel deploy \
-            --cwd=dashboard \
+            --cwd="$GITHUB_WORKSPACE/dashboard" \
             --prod \
             --yes \
             --token="$VERCEL_TOKEN"
