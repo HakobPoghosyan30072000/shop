@@ -8,10 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        working-directory: dashboard
 
     steps:
       - name: Checkout repository
@@ -22,13 +18,18 @@ jobs:
         with:
           node-version: '20'
           cache: 'yarn'
-          cache-dependency-path: '**/yarn.lock'
+          # Update cache path to point to your dashboard's lockfile
+          cache-dependency-path: dashboard/yarn.lock
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: |
+          cd dashboard
+          yarn install --frozen-lockfile
 
       - name: Build project
-        run: yarn build
+        run: |
+          cd dashboard
+          yarn build
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
