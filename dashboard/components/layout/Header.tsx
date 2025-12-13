@@ -7,7 +7,7 @@ import { DarkModeContext } from "./DarkModeWrapper";
 
 
 export default function Header() {
-const { dark, toggleDark } = useContext(DarkModeContext);
+const { dark, toggleDark } = useContext(DarkModeContext)
 
   return (
     <header className='text-black bg-white  shadow-amber-50 border-b fixed right-0 top-0 left-50' >
