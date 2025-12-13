@@ -30,10 +30,14 @@ jobs:
           cd dashboard
           yarn lint
 
-      - name: Run Tests
+      - name: Run Tests (if exists)
         run: |
           cd dashboard
+          if yarn run | grep -q "test"; then
           yarn test
+          else
+          echo "No tests defined, skipping"
+          fi
 
       - name: Build project
         run: |
