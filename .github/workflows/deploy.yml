@@ -34,14 +34,12 @@ steps:
     run: |
       cd dashboard
       yarn lint
-    continue-on-error: false
 
   # 5. Run tests
   - name: Run Tests
     run: |
       cd dashboard
       yarn test
-    continue-on-error: false
 
   # 6. Cache build artifacts (Next.js example)
   - name: Cache Next.js build
