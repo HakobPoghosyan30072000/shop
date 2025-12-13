@@ -11,11 +11,9 @@ runs-on: ubuntu-latest
 
 
 steps:
-  # 1. Checkout repository
   - name: Checkout repository
     uses: actions/checkout@v4
 
-  # 2. Setup Node.js and Yarn cache
   - name: Setup Node.js
     uses: actions/setup-node@v4
     with:
@@ -23,42 +21,35 @@ steps:
       cache: 'yarn'
       cache-dependency-path: '**/yarn.lock'
 
-  # 3. Install dependencies
   - name: Install dependencies
     run: |
       cd dashboard
       yarn install --frozen-lockfile
 
-  # 4. Lint code
   - name: Run ESLint
     run: |
       cd dashboard
       yarn lint
 
-  # 5. Run tests
   - name: Run Tests
     run: |
       cd dashboard
       yarn test
 
-  # 6. Cache build artifacts (Next.js example)
   - name: Cache Next.js build
     uses: actions/cache@v3
     with:
       path: dashboard/.next
       key: ${{ runner.os }}-nextjs-${{ hashFiles('dashboard/yarn.lock') }}
 
-  # 7. Build project
   - name: Build project
     run: |
       cd dashboard
       yarn build
 
-  # 8. Install Vercel CLI
   - name: Install Vercel CLI
     run: npm install --global vercel@latest
 
-  # 9. Check required environment variables
   - name: Check Vercel Secrets
     run: |
       if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_PROJECT_ID" ] || [ -z "$VERCEL_ORG_ID" ]; then
@@ -66,7 +57,6 @@ steps:
         exit 1
       fi
 
-  # 10. Deploy to Vercel
   - name: Deploy to Vercel
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -74,11 +64,3 @@ steps:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     run: |
       vercel deploy --prod --yes --token "$VERCEL_TOKEN"
-
-  # 11. Optional: Notify Slack
-  # - name: Notify Slack
-  #   uses: slackapi/slack-github-action@v1.23.0
-  #   with:
-  #     channel-id: 'C12345678'
-  #     slack-message: 'Deployment to Vercel completed successfully!'
-  #     slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
