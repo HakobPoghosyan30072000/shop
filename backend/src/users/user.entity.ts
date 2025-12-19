@@ -13,4 +13,9 @@ export class User {
 
   @Column()
   password: string;
+
+  toJSON() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...rest } = this;
+  }
 }

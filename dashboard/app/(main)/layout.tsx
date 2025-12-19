@@ -23,25 +23,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  console.log("Root Layout Rendered");
-  
+}) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
       >
-      <DarkModeWrapper>
-      <Header/>
-      <SideBar/>
-      <div className=" min-h-screen">
-      <div className="flex-1 overflow-y-auto">{children}</div>
-      <Footer />
-      </div>
-      </DarkModeWrapper>
+        <DarkModeWrapper>
+          <div className="grid h-screen grid-rows-[auto_1fr_auto] grid-cols-[240px_1fr]">
+            <Header />
+            <SideBar />
+            <main className="overflow-y-auto overflow-x-hidden p-4">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </DarkModeWrapper>
       </body>
     </html>
   );
 }
+

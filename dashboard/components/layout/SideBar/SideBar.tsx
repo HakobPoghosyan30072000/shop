@@ -15,9 +15,9 @@ const SideBar:FC = ():JSX.Element => {
     
   
     return (
-        <aside className="w-50 h-screen bg-white text-black border-r fixed left-0 top-0 ">
+        <aside className="w-50  bg-white text-black border-r  sticky top-16 h-[calc(100vh-64px)]">
             <h2 className="text-2xl font-bold p-4">Dashboard</h2>
-            <ul>
+            <ul className="mt-5">
                 {sidebarItems.map(item => (
                     <SidebarItem key={item.name} item={item} />
                 ))}
