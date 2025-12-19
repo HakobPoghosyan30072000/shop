@@ -13,9 +13,9 @@ export const DarkModeContext = createContext<DarkModeContextType>({} as DarkMode
 
 
 export default function DarkModeWrapper({ children }: { children: ReactNode }) {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(false)
 
-  const toggleDark = () => setDark(!dark);
+  const toggleDark = () => setDark(!dark)
 
   return (
     <DarkModeContext.Provider value={{ dark, toggleDark }}>
